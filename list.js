@@ -270,8 +270,9 @@ function prepareTable(info) {
   var files = info.directories.concat(info.files), prefix = info.prefix;
   var cols = [45, 30, 15];
   var content = [];
-  content.push(padRight('Last Modified', cols[1]) + '  ' +
-               padRight('Size', cols[2]) + 'Books \n');
+  content.push(padRight('Books',cols[0])+
+	  		   padRight('Last Modified', cols[1]) + '  ' +
+			   'Size\n');
   content.push(new Array(cols[0] + cols[1] + cols[2] + 4).join('-') + '\n');
 
   // add ../ at the start of the dir listing, unless we are already at root dir
@@ -281,9 +282,9 @@ function prepareTable(info) {
         item =
             {
               Key: up,
-              keyText,
               LastModified: '',
-              Size: '',
+			  Size: '',
+			  keyText,
               href: S3BL_IGNORE_PATH ? '?prefix=' + up : '../'
             },
         row = renderRow(item, cols);
@@ -318,9 +319,9 @@ function encodePath(path) {
 
 function renderRow(item, cols) {
   var row = '';
+  row += '<a href="' + item.href + '">' + padRight(item.keyText,cols[0]) + '</a>';
   row += padRight(item.LastModified, cols[1]) + '  ';
   row += padRight(item.Size, cols[2]);
-  row += '<a href="' + item.href + '">' + item.keyText + '</a>';
   return row;
 }
 

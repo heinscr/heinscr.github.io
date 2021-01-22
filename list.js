@@ -281,9 +281,9 @@ function prepareTable(info) {
         item =
             {
               Key: up,
+              keyText,
               LastModified: '',
               Size: '',
-              keyText: '../',
               href: S3BL_IGNORE_PATH ? '?prefix=' + up : '../'
             },
         row = renderRow(item, cols);
